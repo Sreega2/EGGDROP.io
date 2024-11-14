@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}Главная{% endblock %}</title>
+    <style>
+        /* Кнопка профиля */
+        .profile-button {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .profile-modal {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            border: 2px solid #333;
+            width: 300px;
+            padding: 20px;
+            display: none;
+            z-index: 10;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-modal h3 {
+            text-align: center;
+        }
+
+        .profile-modal button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="profile-button" onclick="toggleProfileModal()">👤</button>
+
+    <!-- Модальное окно профиля -->
+    <div id="profileModal" class="profile-modal">
+        <h3>Профиль</h3>
+        <p><strong>ID пользователя:</strong> {{ user_id }}</p>
+        <p><strong>Открыто кейсов:</strong> {{ opened_cases }}</p>
+        <p><strong>Инвентарь:</strong></p>
+        <ul>
+            {% for item in inventory %}
+                <li>{{ item['name'] }} ({{ item['value'] }} руб.)</li>
+            {% endfor %}
+        </ul>
+        <button onclick="closeProfileModal()">Закрыть</button>
+    </div>
+
+    {% block content %}{% endblock %}
+
+    <script>
+        function toggleProfileModal() {
+            const modal = document.getElementById('profileModal');
+            modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function closeProfileModal() {
+            const modal = document.getElementById('profileModal');
+            modal.style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>

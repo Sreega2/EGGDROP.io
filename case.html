@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Главное меню</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #333;
+            padding: 15px;
+            text-align: center;
+            color: white;
+        }
+
+        .main-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .case-card {
+            position: relative;
+            background-color: white;
+            margin: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 250px;
+            height: 350px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .case-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .case-card .case-info {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .case-card .case-info h3 {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .case-card .case-info p {
+            font-size: 16px;
+            color: #777;
+        }
+
+        .case-card .case-info button {
+            padding: 10px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .case-card .case-info button:hover {
+            background-color: #4cae4c;
+        }
+
+        /* Стиль для рулетки */
+        .roulette {
+            width: 80%;
+            height: 200px;
+            display: flex;
+            overflow: hidden;
+            border: 2px solid #333;
+            margin: 20px auto;
+            justify-content: flex-start;
+            transition: transform 4s ease-in-out;
+        }
+
+        .roulette .skin {
+            width: 100px;
+            height: 150px;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .roulette img {
+            width: 80%;
+            height: 80%;
+            object-fit: cover;
+        }
+
+        /* Кнопка крутить */
+        .spin-btn {
+            padding: 15px 30px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .spin-btn:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Добро пожаловать в магазин скинов</h1>
+    </div>
+
+    <div class="main-container">
+        {% for case in cases %}
+            <div class="case-card">
+                <img src="{{ url_for('static', filename='images/' + case['image']) }}" alt="{{ case['name'] }}">
+                <div class="case-info">
+                    <h3>{{ case['name'] }}</h3>
+                    <p>Цена: {{ case['price'] }} руб.</p>
+                    <button onclick="startSpin('{{ case['id'] }}')">Открыть</button>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Рулетка -->
+    <div class="roulette" id="roulette">
+        <!-- Скины будут динамически добавляться сюда -->
+    </div>
+
+    <!-- Кнопка крутить -->
+    <button class="spin-btn" id="spinBtn" onclick="spinRoulette()">Крутить</button>
+
+    <script>
+        // Получаем элементы рулетки
+        const roulette = document.getElementById('roulette');
+
+        // Функция для генерации скинов в рулетке
+        function generateRouletteSkins(skins) {
+            roulette.innerHTML = ''; // Очищаем рулетку
+            skins.forEach(skin => {
+                const skinElement = document.createElement('div');
+                skinElement.classList.add('skin');
+                skinElement.innerHTML = `<img src="/static/images/${skin.image}" alt="${skin.name}">`;
+                roulette.appendChild(skinElement);
+            });
+        }
+
+        // Функция, которая запускает вращение рулетки
+        function spinRoulette() {
+            // Запросим данные скинов с сервера
+            fetch(`/spin`)
+                .then(response => response.json())
+                .then(data => {
+                    // Генерируем скины для рулетки
+                    generateRouletteSkins(data.skins);
+
+                    // Анимация вращения рулетки
+                    const spinDistance = -roulette.scrollWidth; // Сдвиг влево на всю ширину рулетки
+                    roulette.style.transition = "transform 4s ease-in-out";
+                    roulette.style.transform = `translateX(${spinDistance}px)`;
+
+                    // Ждем завершения анимации, чтобы показать результат
+                    setTimeout(() => {
+                        const randomSkin = data.skins[Math.floor(Math.random() * data.skins.length)];
+                        alert(`Вы получили: ${randomSkin.name}`);
+                    }, 4000);
+                });
+        }
+
+        // Функция для загрузки скинов при открытии кейса
+        function startSpin(caseId) {
+            fetch(`/spin/${caseId}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Генерируем скины для рулетки
+                    generateRouletteSkins([{
+                        name: data.name,
+                        image: data.image
+                    }]);
+                });
+        }
+    </script>
+
+</body>
+</html>

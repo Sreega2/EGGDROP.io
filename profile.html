@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+    <h1>Профиль пользователя</h1>
+    <p>ID пользователя: {{ user_id }}</p>
+    <p>Открыто кейсов: {{ opened_cases }}</p>
+    <h2>Инвентарь:</h2>
+    <ul>
+        {% for item in inventory %}
+            <li>{{ item['name'] }} - {{ item['value'] }} руб.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
