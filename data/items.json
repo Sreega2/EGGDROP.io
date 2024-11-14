@@ -1,0 +1,116 @@
+{
+  "cases": [
+    {
+      "id": "case1",
+      "name": "Кейс №1",
+      "price": 100,
+      "image": "case1.jfif",
+      "skins": [
+        {"name": "Скин 99999", "value": 50, "image": "skin1.png"},
+        {"name": "Скин 2", "value": 100, "image": "skin2.png"},
+        {"name": "Скин 3", "value": 150, "image": "skin3.png"},
+        {"name": "Скин 4", "value": 150, "image": "skin4.png"},
+        {"name": "Скин 5", "value": 150, "image": "skin5.png"}
+      ]
+    },
+    {
+      "id": "case2",
+      "name": "Кейс №2",
+      "price": 200,
+      "image": "case2.jfif",
+      "skins": [
+        {"name": "Скин A", "value": 100, "image": "skinA.jpg"},
+        {"name": "Скин B", "value": 200, "image": "skinB.jpg"},
+        {"name": "Скин C", "value": 300, "image": "skinC.jpg"}
+      ]
+    },
+    {
+      "id": "case3",
+      "name": "Кейс №3",
+      "price": 150,
+      "image": "case3.jfif",
+      "skins": [
+        {"name": "Скин X", "value": 75, "image": "skinX.jpg"},
+        {"name": "Скин Y", "value": 125, "image": "skinY.jpg"},
+        {"name": "Скин Z", "value": 175, "image": "skinZ.jpg"}
+      ]
+    },
+    {
+      "id": "case4",
+      "name": "Кейс №4",
+      "price": 300,
+      "image": "case4.jfif",
+      "skins": [
+        {"name": "Скин D", "value": 150, "image": "skinD.jpg"},
+        {"name": "Скин E", "value": 250, "image": "skinE.jpg"},
+        {"name": "Скин F", "value": 350, "image": "skinF.jpg"}
+      ]
+    },
+    {
+      "id": "case5",
+      "name": "Кейс №5",
+      "price": 250,
+      "image": "case5.jfif",
+      "skins": [
+        {"name": "Скин 1A", "value": 125, "image": "skin1A.jpg"},
+        {"name": "Скин 2A", "value": 225, "image": "skin2A.jpg"},
+        {"name": "Скин 3A", "value": 325, "image": "skin3A.jpg"}
+      ]
+    },
+    {
+      "id": "case6",
+      "name": "Кейс №6",
+      "price": 400,
+      "image": "case6.jfif",
+      "skins": [
+        {"name": "Скин Q", "value": 200, "image": "skinQ.jpg"},
+        {"name": "Скин W", "value": 300, "image": "skinW.jpg"},
+        {"name": "Скин E", "value": 400, "image": "skinE.jpg"}
+      ]
+    },
+    {
+      "id": "case7",
+      "name": "Кейс №7",
+      "price": 175,
+      "image": "case7.jfif",
+      "skins": [
+        {"name": "Скин R", "value": 80, "image": "skinR.jpg"},
+        {"name": "Скин T", "value": 120, "image": "skinT.jpg"},
+        {"name": "Скин Y", "value": 160, "image": "skinY.jpg"}
+      ]
+    },
+    {
+      "id": "case8",
+      "name": "Кейс №8",
+      "price": 350,
+      "image": "case8.jfif",
+      "skins": [
+        {"name": "Скин U", "value": 175, "image": "skinU.jpg"},
+        {"name": "Скин I", "value": 225, "image": "skinI.jpg"},
+        {"name": "Скин O", "value": 275, "image": "skinO.jpg"}
+      ]
+    },
+    {
+      "id": "case9",
+      "name": "Кейс №9",
+      "price": 500,
+      "image": "case9.jfif",
+      "skins": [
+        {"name": "Скин P", "value": 250, "image": "skinP.jpg"},
+        {"name": "Скин L", "value": 350, "image": "skinL.jpg"},
+        {"name": "Скин K", "value": 450, "image": "skinK.jpg"}
+      ]
+    },
+    {
+      "id": "case10",
+      "name": "Кейс №10",
+      "price": 600,
+      "image": "case10.jfif",
+      "skins": [
+        {"name": "Скин H", "value": 300, "image": "skinH.jpg"},
+        {"name": "Скин J", "value": 400, "image": "skinJ.jpg"},
+        {"name": "Скин G", "value": 500, "image": "skinG.jpg"}
+      ]
+    }
+  ]
+}
